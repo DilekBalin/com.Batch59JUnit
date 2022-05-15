@@ -30,10 +30,10 @@ public class C02_MavenTest {
 
         //5. Sign in buttonuna tiklayin (hata mesaji icin back tusuna tiklayin)
         driver.findElement(By.xpath("//input[@name='submit']")).click();
-        driver.navigate().back();
+        driver.navigate().back();//elimizle dendeik refresh olunca calismadi geriye gidince calisti o yuzden back() yaptik
 
         //6. Online Banking menusunden Pay Bills sayfasina gidin
-        driver.findElement(By.xpath("(//*[text()='Online Banking'])[1]")).click();
+        driver.findElement(By.xpath("(//*[text()='Online Banking'])[1]")).click(); //aradigimiz 1/sirada oldugu icin [1] yazdik
         driver.findElement(By.xpath("//span[@id='pay_bills_link']")).click();
 
         //7. amount kismina yatirmak istediginiz herhangi bir miktari yazin
