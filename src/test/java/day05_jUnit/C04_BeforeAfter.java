@@ -11,12 +11,12 @@ import java.time.Duration;
 
 public class C04_BeforeAfter {
 
-    WebDriver driver;
+    WebDriver driver;   //drıver butun methodlarda calısır buraya yazdıgımız ıcın
 
     @Before
    public void setUp(){
-       WebDriverManager.chromedriver().setup();
-        driver= new ChromeDriver();
+       WebDriverManager.chromedriver().setup();   //ayarlar yapildi
+        driver= new ChromeDriver();//atama yapildi
        driver.manage().window().maximize();
        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
    }

@@ -1,4 +1,4 @@
-package testPractices;
+package testPractices.GroupTekrar;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
@@ -24,28 +24,45 @@ public class Soru1 {
     //8-Sayfayi kapatin
 
     WebDriver driver;
+
     @Before
-    public void before(){
+    public void before() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
+
     @After
-    public void method2() {
-        //driver.close();
+    public void after() {
+        driver.close();
     }
+
     @Test
     public void run() {
+        //2- https://www.google.com/ adresine gidin
         driver.get("https://www.google.com/");
+        //3- cookies uyarisini kabul ederek kapatin
         driver.findElement(By.xpath("//*[text()='Kabul ediyorum']")).click();
-        String arananBaslik=driver.getTitle();
-        String actualTitle="Google";
-        Assert.assertTrue(actualTitle.contains(arananBaslik));
-
-        WebElement aramaKutusu= driver.findElement(By.xpath("//input[@class='gLFyf gsfi']"));
-        aramaKutusu.sendKeys("Nutella"+ Keys.ENTER);
-
-        WebElement sonuc=driver.findElement(By.xpath(""));
+        //4-Sayfa basliginin “Google” ifadesi icerdigini test edin
+        String arananKelime = "Google";
+        String actualTitle = driver.getTitle();
+        Assert.assertTrue(actualTitle.contains(arananKelime));
+        //5- Arama cubuguna “Nutella” yazip aratin
+        WebElement aramaCubugu = driver.findElement(By.xpath("//input[@class='gLFyf gsfi']"));
+        aramaCubugu.sendKeys("Nutella" + Keys.ENTER);
+        //6-Bulunan sonuc sayisini yazdirin
+        WebElement sonuc = driver.findElement(By.xpath("//div[@id='result-stats']"));
+        String sonucText = sonuc.getText(); //Yaklaşık 79.300.000 sonuç bulundu
+        System.out.println(sonucText);
+        //7- sonuc sayisinin 10 milyon’dan fazla oldugunu test edin
+        String[] arr = sonucText.split(" ");
+        String sonucDeger = arr[1].replaceAll("\\p{Punct}", ""); //79300000
+        System.out.println("String noktasiz : " + sonucDeger);
+        int IntSonucDeger = Integer.parseInt(sonucDeger); //79300000
+        System.out.println("Integer : " + IntSonucDeger);
+        int testDegeri = 10000000;
+        Assert.assertTrue(IntSonucDeger > testDegeri);
+        //Assert.assertFalse( IntSonucDeger < testDegeri);
     }
 }
