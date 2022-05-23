@@ -29,6 +29,7 @@ public class C02_ExplicitlyWait extends TestBase {
         Assert.assertTrue(itsEnabledYazielementi.isDisplayed());
         //7. Textbox’in etkin oldugunu(enabled) dogrulayın.
         Assert.assertTrue(enableKutusu.isEnabled());
+        System.out.println("son updated");
     }
 }
 
